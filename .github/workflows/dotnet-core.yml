@@ -8,7 +8,8 @@ on:
 
 jobs:
   build:
-
+    env:
+        PROJECT_PATH: YoutubeToSrt
     runs-on: ubuntu-latest
 
     steps:
@@ -23,3 +24,28 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+    - name: Build osx-x64
+      run: dotnet publish $PROJECT_PATH -r osx-x64 -c Release --self-contained --no-restore && 
+           zip -r -j YoutubeToSrt-osx-x64.zip ./YoutubeToSrt/bin/Release/netcoreapp3.1/osx-x64/publish/*
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
+        VERSION: v1.0.${{ github.run_number }}
+      with:
+        tag_name: ${{ env.VERSION }}
+        release_name: Release ${{ env.VERSION }}
+        draft: false
+        prerelease: false
+     - name: Upload Release Asset osx-x64 
+      id: upload-release-asset-osx-64
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
+        VERSION: v1.0.${{ github.run_number }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} 
+        asset_path: YoutubeToSrt-osx-x64.zip
+        asset_name: YoutubeToSrt-osx-x64.zip
+        asset_content_type: application/zip
