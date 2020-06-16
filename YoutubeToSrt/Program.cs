@@ -9,8 +9,8 @@ namespace Test
         static void Main(string[] args)
         {
             var reg = new Regex("^(\\d+):(\\d+):(\\d+)");
-            string[] lines = File.ReadAllLines(@"source.txt");
-            using (StreamWriter fileWriter = new StreamWriter(@"target.txt"))
+            string[] lines = File.ReadAllLines(@".\source.txt");
+            using (StreamWriter fileWriter = new StreamWriter(@".\target.txt"))
             {
                 var lineNum = 1;
                 fileWriter.WriteLine(Convert.ToString(lineNum));

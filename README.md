@@ -1,4 +1,6 @@
 # YouTube subtitles To .SRT  
+A Tool to convert subtitle files downloaded from YouTube into .srt format
+
 <b>Problem:</b><br/> 
 User published a video to YouTube as well as created subtitles (either upploaded external file or used YouTube Studio).
 Later user decided to cut a piece of video so all time codes going after deleted segment need to be shifted backwards.
