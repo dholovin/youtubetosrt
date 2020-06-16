@@ -12,7 +12,7 @@
 
   <Target Name="BeforeBuild">
     <ItemGroup>
-        <Content Include="source\txt" />
+        <Content Include="source.txt" />
     </ItemGroup>
   </Target>
 
