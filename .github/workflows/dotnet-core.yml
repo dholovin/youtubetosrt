@@ -24,6 +24,9 @@ jobs:
       run: dotnet build $PROJECT_PATH --configuration Release --no-restore
     - name: Test
       run: dotnet test $PROJECT_PATH --no-restore --verbosity normal
+    - name: Build win-x64
+      run: dotnet publish $PROJECT_PATH -r win-x64 -c Release --self-contained --no-restore && 
+           zip -r -j YoutubeToSrt-win-x64.zip ./YoutubeToSrt/bin/Release/netcoreapp3.1/win-x64/publish/*
     - name: Build osx-x64
       run: dotnet publish $PROJECT_PATH -r osx-x64 -c Release --self-contained --no-restore && 
            zip -r -j YoutubeToSrt-osx-x64.zip ./YoutubeToSrt/bin/Release/netcoreapp3.1/osx-x64/publish/*
@@ -38,8 +41,19 @@ jobs:
         release_name: Release ${{ env.VERSION }}
         draft: false
         prerelease: false
-    - name: Upload Release Asset
-      id: upload-release-asset
+    - name: Upload Release Asset win-x64 
+      id: upload-release-asset-win-x64
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        VERSION: v1.0.${{ github.run_number }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} 
+        asset_path: YoutubeToSrt-win-x64.zip
+        asset_name: YoutubeToSrt-win-x64.zip
+        asset_content_type: application/zip
+    - name: Upload Release Asset osx-x64 
+      id: upload-release-asset-osx-x64
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
