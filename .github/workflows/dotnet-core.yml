@@ -19,7 +19,7 @@ jobs:
       with:
         dotnet-version: 3.1.101
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore  $PROJECT_PATH
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
