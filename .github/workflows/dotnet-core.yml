@@ -36,8 +36,6 @@ jobs:
       with:
         tag_name: ${{ env.VERSION }}
         release_name: Release ${{ env.VERSION }}
-        draft: false
-        prerelease: false
      - name: Upload Release Asset osx-x64 
       id: upload-release-asset-osx-64
       uses: actions/upload-release-asset@v1
