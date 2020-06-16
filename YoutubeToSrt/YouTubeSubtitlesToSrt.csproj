@@ -6,7 +6,7 @@
     <RuntimeIdentifiers>win-x64;osx-x64</RuntimeIdentifiers>
 
     <Authors>Denys Holovin</Authors>
-    <Company>Home Furnance</Company>
+    <Company>Home Furnace</Company>
     <Product>YouTube Subtitles To SRT</Product>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
